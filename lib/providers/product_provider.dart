@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
 import '../models/product.dart';
 import '../services/api_service.dart';
-
 enum LoadStatus { initial, loading, loaded, error }
 
 class ProductProvider extends ChangeNotifier {
   final ApiService _apiService = ApiService();
-
   List<Product> _allProducts = [];
   List<String> _categories = [];
   String _selectedCategory = 'All';

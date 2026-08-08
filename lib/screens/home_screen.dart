@@ -5,6 +5,7 @@ import '../providers/cart_provider.dart';
 import '../widgets/product_card.dart';
 import '../widgets/category_filter.dart';
 import 'cart_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _searchController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.red,
                         shape: BoxShape.circle,
                       ),
-                      constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                      constraints:
+                          const BoxConstraints(minWidth: 16, minHeight: 16),
                       child: Text(
                         '${cart.itemCount}',
-                        style: const TextStyle(color: Colors.white, fontSize: 10),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 10),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -69,11 +71,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          IconButton(
+            icon: const Icon(Icons.person_outline),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
+            ),
+          ),
           const SizedBox(width: 8),
         ],
       ),
-
-
       body: RefreshIndicator(
         onRefresh: () => context.read<ProductProvider>().loadProducts(),
         child: Column(
@@ -98,9 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const CategoryFilter(),
             const SizedBox(height: 8),
-
-
-
             Expanded(
               child: Consumer<ProductProvider>(
                 builder: (context, provider, _) {
@@ -113,9 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.error_outline, size: 48, color: Colors.grey),
+                            const Icon(Icons.error_outline,
+                                size: 48, color: Colors.grey),
                             const SizedBox(height: 8),
-                            Text(provider.errorMessage, textAlign: TextAlign.center),
+                            Text(provider.errorMessage,
+                                textAlign: TextAlign.center),
                             const SizedBox(height: 12),
                             ElevatedButton(
                               onPressed: () => provider.loadProducts(),
@@ -131,7 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                       return GridView.builder(
                         padding: const EdgeInsets.all(12),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 0.65,
                           crossAxisSpacing: 12,
@@ -151,6 +158,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-
